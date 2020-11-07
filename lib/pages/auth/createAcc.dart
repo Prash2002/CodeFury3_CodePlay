@@ -191,7 +191,8 @@ class _CreateAccState extends State<CreateAcc> {
       
       typeDone? (type=='hire'? Text('Happy Hiring') : formW()) 
       : 
-      Column(
+      SingleChildScrollView(
+        child: Column(
         children: <Widget>[
          Form(
             key: _form,
@@ -301,7 +302,7 @@ class _CreateAccState extends State<CreateAcc> {
               ),
         ],
       )
-
+      )
     );
   }
 }
