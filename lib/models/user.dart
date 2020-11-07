@@ -39,6 +39,7 @@ class User{
       "prof" : user.prof,
       "project" : user.project,
       "best" : user.best,
+      //fees, city 
    } );
   }
 }

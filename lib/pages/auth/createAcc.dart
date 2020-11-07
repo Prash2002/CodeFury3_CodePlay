@@ -44,7 +44,8 @@ class _CreateAccState extends State<CreateAcc> {
     SnackBar snackbar= SnackBar(content:Text('Welcome ${widget.user.name}') );
     skey.currentState.showSnackBar(snackbar);
     Timer(Duration(seconds: 2), (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: widget.user)));
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: widget.user)));
+      Navigator.pop(context, us);
     });
   }}
 
@@ -116,6 +117,12 @@ class _CreateAccState extends State<CreateAcc> {
             ],
           ), 
             ),
+            RaisedButton(
+              child: Text("submit"),
+              onPressed: ()async{
+                submit();
+                }
+            )
       ],
     );
   }
@@ -174,7 +181,7 @@ class _CreateAccState extends State<CreateAcc> {
                   },
                 child: Text('Next'),
               ),
-            typeDone? (type=='hire'? Text('') : formW) : Text('')
+            typeDone? (type=='hire'? Text('') : formW()) : Text('')
         ],
       )
 

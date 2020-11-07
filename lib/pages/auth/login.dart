@@ -34,7 +34,8 @@ class _LoginState extends State<Login> {
         User userEntered = User(id: user.uid, name: user.displayName, email: user.email, photoUrl: user.photoUrl);
         final DocumentSnapshot doc= await userRef.document(user.uid).get();
         if(!doc.exists){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAcc(user: userEntered)));
+          User us = await Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAcc(user: userEntered)));
+          return us;
         }
         return userEntered;
     
