@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "52305609136",
+    "firebase_url": "https://codefury3-bevy.firebaseio.com",
+    "project_id": "codefury3-bevy",
+    "storage_bucket": "codefury3-bevy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52305609136:android:b1c76364804c1c78fc1675",
+        "android_client_info": {
+          "package_name": "com.example.CodeFury3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52305609136-saoqhbthrihviuvudcs0pqm2es6apb69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.CodeFury3",
+            "certificate_hash": "2feb33f5342b7c50f39610d860595fc44fd16ddd"
+          }
+        },
+        {
+          "client_id": "52305609136-9j2b9rv3hbtdb656t7sudqmhe7s7kccd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_xA10AfT6KqlwrlNuot9ly_LnoH8X_8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52305609136-9j2b9rv3hbtdb656t7sudqmhe7s7kccd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
