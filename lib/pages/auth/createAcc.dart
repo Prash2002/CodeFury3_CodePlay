@@ -26,7 +26,8 @@ class _CreateAccState extends State<CreateAcc> {
   String city ="";
 
   submit() async {
-    final form =_formW.currentState;
+    final form = (type=="hire")? _form.currentState : _formW.currentState;
+    
     if(form.validate())
     {
       form.save();
@@ -189,7 +190,7 @@ class _CreateAccState extends State<CreateAcc> {
       ),
       body:
       
-      typeDone? (type=='hire'? Text('Happy Hiring') : formW()) 
+      typeDone? (formW()) 
       : 
       SingleChildScrollView(
         child: Column(
@@ -291,11 +292,14 @@ class _CreateAccState extends State<CreateAcc> {
                   side: BorderSide(color: Color(0xffF15D4F))
                 ),
                 color: Color(0xffF15D4F),
-                onPressed: (){
-                  setState((){
+                onPressed: type=="hire"? 
+                  ()async{submit();}:
+                  (){
+                    setState((){
                     typeDone = true;
                   });
-                  },
+                  }
+                  ,
                 child: Text('Next',
                 style:TextStyle( 
                   color: Colors.white),)

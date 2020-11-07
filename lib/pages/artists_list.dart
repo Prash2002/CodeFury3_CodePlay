@@ -3,6 +3,10 @@ import 'package:CodeFury3/models/artist.dart';
 import 'package:CodeFury3/utilities/colors.dart';
 import 'package:flutter/material.dart';
 
+import 'package:google_sign_in/google_sign_in.dart';
+
+final GoogleSignIn googleSignIn = GoogleSignIn();
+
 class ArtistsList extends StatefulWidget {
   @override
   _ArtistsListState createState() => _ArtistsListState();
@@ -31,6 +35,12 @@ class _ArtistsListState extends State<ArtistsList> {
     'Sketch Artist',
     'Painter'
   ];
+
+
+  void logout(){
+    googleSignIn.signOut();
+    Navigator.pop(context);
+  }
 
   Widget _buildChips() {
     List<Widget> chips = new List();
@@ -104,7 +114,18 @@ class _ArtistsListState extends State<ArtistsList> {
                       Padding(
                         padding: const EdgeInsets.only(left: 30),
                         child:
-                            Icon(Icons.message, color: Colors.black, size: 35),
+                            Column(
+                             children: <Widget>[ 
+                               Icon(Icons.message, color: Colors.black, size: 35),
+                               SizedBox(height: 0.5),
+                               IconButton(
+                                 icon:Icon(Icons.exit_to_app, color: Colors.black, size: 35),
+                                 onPressed: (){
+                                   logout();
+                                 }
+                                 )
+                             ]
+                            )
                       ),
                     ]),
               ),

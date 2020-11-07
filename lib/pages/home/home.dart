@@ -15,18 +15,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  void logout(){
-    googleSignIn.signOut();
-    Navigator.pop(context);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: RaisedButton(
-        child : Text('Logout'),
-        onPressed:(){ logout();}
-      )
+      // child: RaisedButton(
+      //   child : Text('Logout'),
+      //   onPressed:(){ logout();}
+      // )
     );
   }
 }

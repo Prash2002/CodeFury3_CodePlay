@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Nunito',
       ),
-      home: IntroScreen(),
-//home: ArtistsList(),
+      // home: IntroScreen(),
+    home: ArtistsList(),
   );
   }
 }
