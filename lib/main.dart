@@ -1,3 +1,4 @@
+import 'package:CodeFury3/widgets/slides.dart';
 import 'package:CodeFury3/pages/artists_list.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Nunito',
       ),
-      home: ArtistsList(),
-    );
+      home: IntroScreen(),
+//home: ArtistsList(),
+  );
   }
 }
 

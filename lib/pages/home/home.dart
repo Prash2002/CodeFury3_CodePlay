@@ -1,5 +1,8 @@
 import 'package:CodeFury3/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+final GoogleSignIn googleSignIn = GoogleSignIn();
 
 class Home extends StatefulWidget {
   final User currentUser;
@@ -11,10 +14,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  void logout(){
+    googleSignIn.signOut();
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Home')
+      child: RaisedButton(
+        child : Text('Logout'),
+        onPressed:(){ logout();}
+      )
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:CodeFury3/models/user.dart';
+import 'package:CodeFury3/pages/auth/createAcc.dart';
 import 'package:CodeFury3/pages/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,8 @@ class _LoginState extends State<Login> {
         User userEntered = User(id: user.uid, name: user.displayName, email: user.email, photoUrl: user.photoUrl);
         final DocumentSnapshot doc= await userRef.document(user.uid).get();
         if(!doc.exists){
-          await User().addDocument(userEntered);
+          User us = await Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAcc(user: userEntered)));
+          return us;
         }
         return userEntered;
     
@@ -52,43 +54,30 @@ class _LoginState extends State<Login> {
               //     fit:BoxFit.cover,
               //   ),
               // ),
-              child:Stack(
+              child:Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Positioned(
-                    top:orientation==Orientation.portrait? height*0.56:height/2 -(height*0.55/2),
-                    left:orientation==Orientation.portrait? width/2-(width*0.75/2):width/2-(width*0.4/2),
-                    child: GestureDetector(
+                  Image.network(
+                    "https://image.freepik.com/free-vector/isometric-young-sitting-boy-using-technological-devices-background_23-2148125783.jpg"
+                  ),
+                  SizedBox(
+                    height: 20.0
+                  ),
+                    GestureDetector(
                       child: Container(
-                        width:orientation==Orientation.portrait? width*0.75:width*0.4,
-                        height:orientation==Orientation.portrait? height*0.28:height*0.55,
+                        // width:orientation==Orientation.portrait? width*0.75:width*0.4,
+                        // height:orientation==Orientation.portrait? height*0.28:height*0.55,
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(20)
+                          borderRadius: BorderRadius.circular(20) 
                         ),
-                        child:Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: 
-                          Column(
-                            children: <Widget>[
-                              Text("Login",
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Color.fromRGBO(71, 94, 84,1)
-                              ),
-                              ),
-                              Spacer(flex:1),
-                              // SvgPicture.asset(
-                              // 'assets/images/icons8-gmail.svg',
-                              //  height:100,
-                              // ),
-                              Spacer(flex:1),
-                              Text("Google Sign In",style: TextStyle(
+                        
+                            child: Text("Google Sign In",style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
                                 // fontFamily: 'Acme',
-                                color: Color.fromRGBO(235, 111, 62,1)
-                              ),)
-                            ],
+                                color: Color(0xffF15D4F)
+                             
                           ),
                         ),
                       ),
@@ -97,7 +86,7 @@ class _LoginState extends State<Login> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: user)));
                           },
                     ),
-                  ),
+                  
                 ],
               ),
             ),
