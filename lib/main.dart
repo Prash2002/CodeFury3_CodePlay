@@ -1,3 +1,4 @@
+import 'package:CodeFury3/widgets/slides.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/auth/login.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFF15D4F),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: IntroScreen(),
     );
   }
 }

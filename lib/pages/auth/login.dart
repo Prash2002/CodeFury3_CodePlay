@@ -1,4 +1,5 @@
 import 'package:CodeFury3/models/user.dart';
+import 'package:CodeFury3/pages/auth/createAcc.dart';
 import 'package:CodeFury3/pages/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,7 @@ class _LoginState extends State<Login> {
         User userEntered = User(id: user.uid, name: user.displayName, email: user.email, photoUrl: user.photoUrl);
         final DocumentSnapshot doc= await userRef.document(user.uid).get();
         if(!doc.exists){
-          await User().addDocument(userEntered);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAcc(user: userEntered)));
         }
         return userEntered;
     
