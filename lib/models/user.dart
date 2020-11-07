@@ -9,9 +9,11 @@ class User{
   final String prof ;
   final String project;
   final String best;
+  final String city;
+
   User({
     this.id, this.name, this.email, this.photoUrl,
-    this.type, this.prof, this.project, this.best
+    this.type, this.prof, this.project, this.best, this.city
   });
 
   final CollectionReference userCollection = Firestore.instance.collection('users');
@@ -26,6 +28,7 @@ class User{
       prof: doc['prof'],
       project: doc['project'],
       best: doc['best'],
+      city: doc['city'],
     );
   }
 
@@ -39,6 +42,7 @@ class User{
       "prof" : user.prof,
       "project" : user.project,
       "best" : user.best,
+      "city": user.city,
       //fees, city 
    } );
   }

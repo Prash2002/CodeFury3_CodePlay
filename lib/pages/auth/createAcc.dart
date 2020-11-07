@@ -23,9 +23,10 @@ class _CreateAccState extends State<CreateAcc> {
   String value ='Actor';
   String projects="";
   String best ="";
+  String city ="";
 
   submit() async {
-    final form =_form.currentState;
+    final form =_formW.currentState;
     if(form.validate())
     {
       form.save();
@@ -37,7 +38,8 @@ class _CreateAccState extends State<CreateAcc> {
          type: type,
          prof: value,
          project: projects,
-         best: best
+         best: best,
+         city: city
          );
       
       await User().addDocument(us);
@@ -50,12 +52,22 @@ class _CreateAccState extends State<CreateAcc> {
   }}
 
   Widget formW(){
-    return Column(
+    return SingleChildScrollView(
+      child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
       children: [
         Form(
           key: _formW,
           child: Column(
             children: [
+              SizedBox(
+                  height: 30.0,
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text("Profession: "),
               DropdownButton(
                 value: value,
                 icon: Icon(Icons.keyboard_arrow_down),
@@ -77,12 +89,16 @@ class _CreateAccState extends State<CreateAcc> {
                       child: Text(e)
                       );
                 }).toList(),
-              ),
+              ),]),
+              SizedBox(
+                  height: 30.0,
+                ),
             TextFormField(
                 keyboardType: TextInputType.multiline,
-                maxLines: null,
+                minLines:2,
+                maxLines: 6,
                 decoration: InputDecoration(
-                  labelText: "Enter the Project names in which you've worked",
+                  labelText: "Your Project names",
                   // labelStyle: TextStyle(
                   //   color: Colors.pink
                   // ),
@@ -97,9 +113,12 @@ class _CreateAccState extends State<CreateAcc> {
                       });
                   }
                 ),
+                SizedBox(
+                  height: 30.0,
+                ),
               TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
+                // keyboardType: TextInputType.multiline,
+                // maxLines: 6,
                 decoration: InputDecoration(
                   labelText: "Best project youtube video link",
                   // labelStyle: TextStyle(
@@ -117,71 +136,169 @@ class _CreateAccState extends State<CreateAcc> {
             ],
           ), 
             ),
+            SizedBox(
+                  height: 30.0,
+                ),
+                TextFormField(
+                decoration: InputDecoration(
+                  labelText: "City",
+                  // labelStyle: TextStyle(
+                  //   color: Colors.pink
+                  // ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50.0)
+                  )
+                ),
+                onChanged: (val)
+                  {
+                    setState(() => city = val);
+                  }
+                ),
+            SizedBox(
+                  height: 30.0,
+                ),
             RaisedButton(
-              child: Text("submit"),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: Color(0xffF15D4F))
+                ),
+                color: Color(0xffF15D4F),
+              child: Text("submit",
+                style:TextStyle( 
+                  color: Colors.white)),
               onPressed: ()async{
                 submit();
                 }
             )
       ],
-    );
+    )));
   }
 
   @override
   Widget build(BuildContext parentContext) {
+    
+        var height = MediaQuery.of(context).size.height;
+        var width = MediaQuery.of(context).size.width;
+        var orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       key: skey,
       appBar: AppBar(
         title: Text('Create Account'),
+        centerTitle: true,
+        automaticallyImplyLeading: false
       ),
-      body:Column(
+      body:
+      
+      typeDone? (type=='hire'? Text('Happy Hiring') : formW()) 
+      : 
+      Column(
         children: <Widget>[
          Form(
             key: _form,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("What do you want to do?"),
+                 SizedBox(
+                  height: 30.0,
+                ),
+                Text("You are : ",
+                  style: TextStyle(
+                    fontSize: 25.0
+                  )
+                ),
                 SizedBox(
                   height: 20.0,
                 ),
-                Row(
-                  children: <Widget>[
-                    Radio(
-                      value:  'hire',
-                      groupValue: type,
-                        onChanged: (val)
-                        {
-                          setState(() => type = val);
-                        }
-                      ),
-                      Text('Hire a Talent'),
-                    ],
-                  ),
-                  Row(
-                  children: <Widget>[
-                    Radio(
-                      value:  'work',
-                      groupValue: type,
-                        onChanged: (val)
-                        {
-                          setState(() => type = val);
-                        }
-                      ),
-                      Text('Freelance'),
-                    ],
-                  ),
-              ],
-            ) ,
+                
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: width*0.075, vertical: height*0.03),
+                      padding: EdgeInsets.symmetric(vertical: height*0.02),
+                      width: width*0.85,
+                      decoration: BoxDecoration(
+                          // border: Border.all(color: Color(0xffF15D4F))
+                          border: Border.all(),
+                        ),
+                        // height:orientation==Orientation.portrait? height*0.28:height*0.55,
+                      child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Radio(
+                        value:  'hire',
+                        groupValue: type,
+                          onChanged: (val)
+                          {
+                            setState(() => type = val);
+                          }
+                        ),
+                        Container(
+                        width: width*0.65,
+                        child: Column(
+                          children:<Widget> [
+                            Image.network("https://image.freepik.com/free-vector/recruiting-professionals-studying-candidate-profiles_1262-21404.jpg",
+                            width: width*0.65,
+                                fit: BoxFit.cover
+                              ),
+                          Text('a Recuiter',style:TextStyle( 
+                              // color: Colors.white
+                              fontSize: 19.0
+                              ),),
+                          ]))
+                      ],
+                    )),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: width*0.075, vertical: height*0.02),
+                      padding: EdgeInsets.symmetric(vertical: height*0.02),
+                      width: width*0.85,
+                      decoration: BoxDecoration(
+                          // border: Border.all(color: Color(0xffF15D4F))
+                          border: Border.all(),
+                        ),
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Radio(
+                        value:  'work',
+                        groupValue: type,
+                          onChanged: (val)
+                          {
+                            setState(() => type = val);
+                          }
+                        ),
+                        Container(
+                        width: width*0.65,
+                        child: Column(
+                          children:<Widget> [
+                            Image.network("https://image.freepik.com/free-vector/person-covering-emotions-searching-identity_74855-5560.jpg",
+                            width: width*0.65,
+                                fit: BoxFit.cover
+                              ),
+                          Text('an Artist',
+                            style:TextStyle( 
+                              // color: Colors.white
+                              fontSize: 19.0
+                              ),
+                              ),
+                          ]))
+                      ],
+                    ),)
+                  ]
+                )
               ),
               RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: Color(0xffF15D4F))
+                ),
+                color: Color(0xffF15D4F),
                 onPressed: (){
                   setState((){
                     typeDone = true;
                   });
                   },
-                child: Text('Next'),
+                child: Text('Next',
+                style:TextStyle( 
+                  color: Colors.white),)
               ),
-            typeDone? (type=='hire'? Text('') : formW()) : Text('')
         ],
       )
 
