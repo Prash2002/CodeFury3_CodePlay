@@ -1,4 +1,5 @@
 import 'package:CodeFury3/components/artist_list_item.dart';
+import 'package:CodeFury3/pages/artist_page.dart';
 import 'package:CodeFury3/utilities/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:CodeFury3/models/user.dart';
@@ -204,7 +205,12 @@ void initState() {
                     child: ListView.builder(
                         itemCount: artists.length,
                         itemBuilder: (context, index) {
-                          return ArtistListItem(artist:artists[index], index:index);
+                          return GestureDetector(
+                            child: ArtistListItem(artist:artists[index], index:index),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ArtistPage(artist: artists[index])));
+                            }
+                            );
                         }));
                       }
               ),
