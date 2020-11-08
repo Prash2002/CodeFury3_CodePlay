@@ -1,8 +1,9 @@
 import 'package:CodeFury3/models/artist.dart';
+import 'package:CodeFury3/models/user.dart';
 import 'package:flutter/material.dart';
 
 class ArtistListItem extends StatelessWidget {
-  final Artist artist;
+  final User artist;
   final int index;
   ArtistListItem({this.artist,this.index});
   @override
@@ -29,7 +30,8 @@ class ArtistListItem extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
             child: Image.network(
-                "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+                // "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+                artist.photoUrl,
                 width: width * 0.4,
                 height: 100,
                 fit: BoxFit.cover),
@@ -39,7 +41,7 @@ class ArtistListItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(artist.name,
+                Text(artist.name.split(" ")[0],
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
                 Row(children: [
@@ -50,7 +52,7 @@ class ArtistListItem extends StatelessWidget {
                 Row(children: [
                   Icon(Icons.work, size: 15),
                   SizedBox(width: 5),
-                  Text(artist.profession),
+                  Text(artist.prof),
                 ]),
                 // Row(
                 //   children: [

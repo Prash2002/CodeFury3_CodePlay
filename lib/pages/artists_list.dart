@@ -2,28 +2,53 @@ import 'package:CodeFury3/components/artist_list_item.dart';
 import 'package:CodeFury3/models/artist.dart';
 import 'package:CodeFury3/utilities/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:CodeFury3/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
+final usersRef = Firestore.instance.collection('users');
+
 class ArtistsList extends StatefulWidget {
+  final User currentUser;
+  ArtistsList({this.currentUser}) ;
   @override
   _ArtistsListState createState() => _ArtistsListState();
 }
 
 class _ArtistsListState extends State<ArtistsList> {
+
+// void getUsers() async {
+//   print("get users");
+//   QuerySnapshot snap = await usersRef.where("type", isEqualTo: "work").getDocuments();
+  
+  
+//   print(artists);
+//   print("got users");
+// }
+  
+ @override
+void initState() {
+  super.initState();
+  // getUsers();
+}
+
+  // List artists = user;
+
   bool _selected = false;
-  List artists = [
-    Artist(name: "Gandham Prasanthi", city: "Bangalore", profession: "Painter"),
-    Artist(name: "K Divyasri", city: "Bangalore", profession: "Dancer"),
-    Artist(name: "Ananya Kodukule", city: "Bangalore", profession: "Singer"),
-    Artist(name: "Addy Gupta", city: "Kolkata", profession: "Dancer"),
-    Artist(name: "Gandham Prasanthi", city: "Bangalore", profession: "Painter"),
-    Artist(name: "K Divyasri", city: "Bangalore", profession: "Dancer"),
-    Artist(name: "Ananya Kodukule", city: "Bangalore", profession: "Singer"),
-    Artist(name: "Addy Gupta", city: "Kolkata", profession: "Dancer"),
-  ];
+  // List artists = [
+  //   Artist(name: "Gandham Prasanthi", city: "Bangalore", profession: "Painter"),
+  //   Artist(name: "K Divyasri", city: "Bangalore", profession: "Dancer"),
+  //   Artist(name: "Ananya Kodukule", city: "Bangalore", profession: "Singer"),
+  //   Artist(name: "Addy Gupta", city: "Kolkata", profession: "Dancer"),
+  //   Artist(name: "Gandham Prasanthi", city: "Bangalore", profession: "Painter"),
+  //   Artist(name: "K Divyasri", city: "Bangalore", profession: "Dancer"),
+  //   Artist(name: "Ananya Kodukule", city: "Bangalore", profession: "Singer"),
+  //   Artist(name: "Addy Gupta", city: "Kolkata", profession: "Dancer"),
+  // ];
+
+//  
 
   int _selectedIndex = 0;
   List<String> _options = [
@@ -100,7 +125,7 @@ class _ArtistsListState extends State<ArtistsList> {
                           ),
                           children: [
                             TextSpan(
-                              text: "Adrika!",
+                              text: widget.currentUser.name.split(" ")[0],
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 45,
@@ -164,14 +189,26 @@ class _ArtistsListState extends State<ArtistsList> {
               Container(height: height * 0.1, child: _buildChips()),
 
               // List
-              Container(
-                  padding: EdgeInsets.only(left: 15),
-                  height: height * 0.6,
-                  child: ListView.builder(
-                      itemCount: artists.length,
-                      itemBuilder: (context, index) {
-                        return ArtistListItem(artist:artists[index], index:index);
-                      })),
+              FutureBuilder<QuerySnapshot>(
+                future: usersRef.where("type", isEqualTo: "work").getDocuments(),
+                 builder: (context, snapshot){
+                   if(!snapshot.hasData){
+                     return CircularProgressIndicator();
+                   }
+                    List<User> artists =[];
+                    snapshot.data.documents.forEach((element) {
+                      artists.add(User.fromDocument(element));
+                    });
+                   return Container(
+                    padding: EdgeInsets.only(left: 15),
+                    height: height * 0.6,
+                    child: ListView.builder(
+                        itemCount: artists.length,
+                        itemBuilder: (context, index) {
+                          return ArtistListItem(artist:artists[index], index:index);
+                        }));
+                      }
+              ),
             ],
           ),
         ),

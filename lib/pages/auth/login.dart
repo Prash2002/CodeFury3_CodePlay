@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../artists_list.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -83,7 +84,7 @@ class _LoginState extends State<Login> {
                       ),
                       onTap: ()async {
                           User user = await signInWithGoogle();
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: user)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ArtistsList(currentUser: user)));
                           },
                     ),
                   
