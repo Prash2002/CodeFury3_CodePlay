@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:CodeFury3/models/user.dart';
-import 'package:CodeFury3/pages/home/home.dart';
 import 'package:flutter/material.dart';
 
 class CreateAcc extends StatefulWidget {

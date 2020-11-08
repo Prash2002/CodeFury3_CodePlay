@@ -1,4 +1,4 @@
-import 'package:CodeFury3/models/artist.dart';
+
 import 'package:CodeFury3/models/user.dart';
 import 'package:flutter/material.dart';
 

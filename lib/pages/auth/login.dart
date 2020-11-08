@@ -1,6 +1,5 @@
 import 'package:CodeFury3/models/user.dart';
 import 'package:CodeFury3/pages/auth/createAcc.dart';
-import 'package:CodeFury3/pages/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,4 @@
 import 'package:CodeFury3/components/artist_list_item.dart';
-import 'package:CodeFury3/models/artist.dart';
 import 'package:CodeFury3/utilities/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:CodeFury3/models/user.dart';
